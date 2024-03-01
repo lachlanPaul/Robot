@@ -1,3 +1,5 @@
+Robot code for a robot made in a class I have.
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the CENTERSTAGE (2023-2024) competition season.
