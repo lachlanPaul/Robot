@@ -17,7 +17,7 @@ public class RobotTeleOp extends LinearOpMode {
     public DcMotor rightWheel;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         leftWheel = hardwareMap.get(DcMotor.class, "leftWheel");
         rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
 
