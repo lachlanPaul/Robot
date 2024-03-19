@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.common.BothWheels;
+
 /**
- * Main OpMode for ROBOT_NAME_HERE.
- * Basic drive and arm capabilities. Maybe even suspension and drone launching in the future.
+ * Main OpMode for a generic regular wheel robot with two motors.
+ * Basic drive capabilities. Maybe even arm, suspension and drone launching in the future.
  * That's up to the builders though.
  *
  * @author Lachlan Paul, 2024
@@ -15,11 +17,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class RobotTeleOp extends LinearOpMode {
     public DcMotor leftWheel;
     public DcMotor rightWheel;
+    public BothWheels bothWheels;
 
     @Override
     public void runOpMode() throws InterruptedException {
         leftWheel = hardwareMap.get(DcMotor.class, "leftWheel");
         rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
+        bothWheels = new BothWheels(leftWheel, rightWheel);
 
         waitForStart();
 
@@ -27,15 +31,10 @@ public class RobotTeleOp extends LinearOpMode {
             leftWheel.setDirection(DcMotor.Direction.REVERSE);
             rightWheel.setDirection(DcMotor.Direction.FORWARD);
 
-            leftWheel.setPower(-gamepad1.left_stick_y);
-            rightWheel.setPower(-gamepad1.left_stick_y);
-
-            // This makes it so the robot can rotate.
-            // It works without the if statement but there's probably a better way.
-            // It's just here for future reference.
             // if (gamepad1.right_stick_x != 0)
-            leftWheel.setPower(gamepad1.right_stick_x);
-            rightWheel.setPower(-gamepad1.right_stick_x);
+            leftWheel.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x);
+            rightWheel.setPower(-gamepad1.left_stick_y - gamepad1.right_stick_x);
+//            bothWheels.setBothWheelPowers(-gamepad1.left_stick_y + gamepad1.right_stick_x);
 
             telemetry.addData("Left Wheel Power", leftWheel.getPower());
             telemetry.addData("Right Wheel Power", rightWheel.getPower());
