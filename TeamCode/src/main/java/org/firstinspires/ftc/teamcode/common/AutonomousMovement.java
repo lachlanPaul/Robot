@@ -23,7 +23,15 @@ public class AutonomousMovement {
     public void moveForward(int cm) {
         // TODO: Figure out proper unit of measurement.
         //  setTargetPosition() uses encoder ticks and not a specific unit of measurement.
+        leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         leftWheel.setTargetPosition(cm);
         rightWheel.setTargetPosition(cm);
+    }
+
+    public void update() {
+        if (!leftWheel.isBusy()) leftWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        if (!rightWheel.isBusy()) rightWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

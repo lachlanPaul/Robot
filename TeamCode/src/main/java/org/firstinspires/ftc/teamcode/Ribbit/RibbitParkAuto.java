@@ -22,6 +22,8 @@ public class RibbitParkAuto extends LinearOpMode {
             rightWheel.setDirection(DcMotorSimple.Direction.REVERSE);
 
             autoMovement.moveForward(5);
+
+            autoMovement.update();
         }
     }
 }
