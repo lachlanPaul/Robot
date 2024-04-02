@@ -1,11 +1,16 @@
-package org.firstinspires.ftc.teamcode.Ribbit;
+package org.firstinspires.ftc.teamcode.common;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class RibbitCannon {
+/**
+ * Drone Launcher
+ *
+ * @author Lachlan Paul, 2024
+ */
+public class Cannon {
     public Servo prolong;
 
-    public RibbitCannon(Servo pl) {
+    public Cannon(Servo pl) {
         prolong = pl;
     }
 

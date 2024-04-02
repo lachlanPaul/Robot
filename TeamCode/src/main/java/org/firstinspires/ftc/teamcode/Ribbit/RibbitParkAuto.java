@@ -7,20 +7,27 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.common.AutonomousMovement;
 
 public class RibbitParkAuto extends LinearOpMode {
-    public DcMotor leftWheel;
-    public DcMotor rightWheel;
+    public DcMotor frontLeft;
+    public DcMotor frontRight;
+    public DcMotor backLeft;
+    public DcMotor backRight;
     public AutonomousMovement autoMovement;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        leftWheel = hardwareMap.get(DcMotor.class, "leftWheel");
-        rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
-        autoMovement = new AutonomousMovement(leftWheel, rightWheel);
+        frontLeft = hardwareMap.get(DcMotor.class, "fl");
+        frontRight = hardwareMap.get(DcMotor.class, "fr");
+        backLeft = hardwareMap.get(DcMotor.class, "bl");
+        backRight = hardwareMap.get(DcMotor.class, "br");
+
+        autoMovement = new AutonomousMovement(frontLeft, frontRight, backLeft, backRight);
+
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontRight.setDirection(DcMotor.Direction.FORWARD);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
         while (opModeIsActive()) {
-            leftWheel.setDirection(DcMotorSimple.Direction.FORWARD);
-            rightWheel.setDirection(DcMotorSimple.Direction.REVERSE);
-
             autoMovement.moveForward(5);
 
             autoMovement.update();

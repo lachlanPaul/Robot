@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.common.BothWheels;
 
+@Deprecated
 @Autonomous(name = "RobotParkAuto")
 public class RobotParkAuto extends LinearOpMode {
     public DcMotor leftWheel;

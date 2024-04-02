@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  *
  * @author Lachlan Paul, 2024
  */
+@Deprecated
 public class BothWheels {
     public DcMotor leftWheel;
     public DcMotor rightWheel;

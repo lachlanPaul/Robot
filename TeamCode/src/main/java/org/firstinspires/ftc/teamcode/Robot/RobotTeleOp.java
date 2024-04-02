@@ -23,7 +23,6 @@ public class RobotTeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         leftWheel = hardwareMap.get(DcMotor.class, "leftWheel");
         rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
-        bothWheels = new BothWheels(leftWheel, rightWheel);
 
         waitForStart();
 
@@ -31,10 +30,8 @@ public class RobotTeleOp extends LinearOpMode {
             leftWheel.setDirection(DcMotor.Direction.REVERSE);
             rightWheel.setDirection(DcMotor.Direction.FORWARD);
 
-            // if (gamepad1.right_stick_x != 0)
             leftWheel.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x);
             rightWheel.setPower(-gamepad1.left_stick_y - gamepad1.right_stick_x);
-//            bothWheels.setBothWheelPowers(-gamepad1.left_stick_y + gamepad1.right_stick_x);
 
             telemetry.addData("Left Wheel Power", leftWheel.getPower());
             telemetry.addData("Right Wheel Power", rightWheel.getPower());
