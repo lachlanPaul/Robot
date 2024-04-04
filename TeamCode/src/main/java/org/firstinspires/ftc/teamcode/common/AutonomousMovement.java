@@ -31,8 +31,7 @@ public class AutonomousMovement {
         //  setTargetPosition() uses encoder ticks and not a specific unit of measurement.
         setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontLeft.setTargetPosition(cm);
-        frontRight.setTargetPosition(cm);
+        setAllMotorsTarget(cm);
     }
 
     public void moveBackwards(int cm) {
@@ -48,6 +47,13 @@ public class AutonomousMovement {
         frontRight.setMode(mode);
         backLeft.setMode(mode);
         backRight.setMode(mode);
+    }
+
+    private void setAllMotorsTarget(int cm) {
+        frontLeft.setTargetPosition(cm);
+        frontRight.setTargetPosition(cm);
+        backLeft.setTargetPosition(cm);
+        backRight.setTargetPosition(cm);
     }
 
     public void update() {

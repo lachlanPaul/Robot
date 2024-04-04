@@ -68,8 +68,14 @@ public class RibbitTeleOp extends LinearOpMode {
                 claws.toggleClaw(Claws.ServoSide.RIGHT);
             }
 
-            telemetry.addData("Left Wheel Power:", frontLeft.getPower());
-            telemetry.addData("Right Wheel Power:", frontRight.getPower());
+            telemetry.addData("Front Left Power:", frontLeft.getPower());
+            telemetry.addData("Front Right Power:", frontRight.getPower());
+            telemetry.addData("Back Left Power", backLeft.getPower());
+            telemetry.addData("Back Right Power", backRight.getPower());
+
+            telemetry.addData("X Power", x);
+            telemetry.addData("Y Power", y);
+            telemetry.addData("R Power", r);
 
             telemetry.addData("Left Claw: ", (claws.isClawOpen(Claws.ServoSide.LEFT) ? "Closed" : "Open"));
             telemetry.addData("Right Claw: ", (claws.isClawOpen(Claws.ServoSide.RIGHT) ? "Closed" : "Open"));
