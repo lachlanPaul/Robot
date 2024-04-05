@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.common.Cannon;
 import org.firstinspires.ftc.teamcode.common.Claws;
+import org.firstinspires.ftc.teamcode.common.MecanumDrive;
 
 public class RibbitTeleOp extends LinearOpMode {
     public DcMotor frontLeft;
@@ -14,14 +15,11 @@ public class RibbitTeleOp extends LinearOpMode {
     public DcMotor backLeft;
     public DcMotor backRight;
 
-    public double x;
-    public double y;
-    public double r;
-
     public Servo leftClaw;
     public Servo rightClaw;
     public Servo prolong;
 
+    public MecanumDrive drive;
     public Claws claws;
     public Cannon cannon;
 
@@ -32,25 +30,14 @@ public class RibbitTeleOp extends LinearOpMode {
         backLeft = hardwareMap.get(DcMotor.class, "bl");
         backRight = hardwareMap.get(DcMotor.class, "br");
 
+        drive = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
         claws = new Claws(leftClaw, rightClaw);
         cannon = new Cannon(prolong);
-
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
         waitForStart();
 
         while (opModeIsActive()) {
-            x = gamepad1.left_stick_x;
-            y = -gamepad1.left_stick_y;
-            r = gamepad1.right_stick_x;
-
-            frontLeft.setPower(x + y + r);
-            frontRight.setPower(x - y - r);
-            backLeft.setPower(y - x - r);
-            backRight.setPower(y + x - r);
+            drive.setPowerWithController(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
             if (gamepad1.right_trigger == 1.0) {
                 cannon.fire();
@@ -72,10 +59,6 @@ public class RibbitTeleOp extends LinearOpMode {
             telemetry.addData("Front Right Power:", frontRight.getPower());
             telemetry.addData("Back Left Power", backLeft.getPower());
             telemetry.addData("Back Right Power", backRight.getPower());
-
-            telemetry.addData("X Power", x);
-            telemetry.addData("Y Power", y);
-            telemetry.addData("R Power", r);
 
             telemetry.addData("Left Claw: ", (claws.isClawOpen(Claws.ServoSide.LEFT) ? "Closed" : "Open"));
             telemetry.addData("Right Claw: ", (claws.isClawOpen(Claws.ServoSide.RIGHT) ? "Closed" : "Open"));
