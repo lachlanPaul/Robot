@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Ribbit;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -30,17 +32,17 @@ public class RibbitTeleOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        frontLeft = hardwareMap.get(DcMotor.class, "fl");
-        frontRight = hardwareMap.get(DcMotor.class, "fr");
-        backLeft = hardwareMap.get(DcMotor.class, "bl");
-        backRight = hardwareMap.get(DcMotor.class, "br");
+        frontLeft = hardwareMap.tryGet(DcMotor.class, "fl");
+        frontRight = hardwareMap.tryGet(DcMotor.class, "fr");
+        backLeft = hardwareMap.tryGet(DcMotor.class, "bl");
+        backRight = hardwareMap.tryGet(DcMotor.class, "br");
 
-        armMotor = hardwareMap.get(DcMotor.class, "am");
-        suspensionMotor = hardwareMap.get(DcMotor.class, "sm");
+        armMotor = hardwareMap.tryGet(DcMotor.class, "am");
+        suspensionMotor = hardwareMap.tryGet(DcMotor.class, "sm");
 
-        leftClaw = hardwareMap.get(Servo.class, "lc");
-        rightClaw = hardwareMap.get(Servo.class, "rc");
-        prolong = hardwareMap.get(Servo.class, "pl");
+        leftClaw = hardwareMap.tryGet(Servo.class, "lc");
+        rightClaw = hardwareMap.tryGet(Servo.class, "rc");
+        prolong = hardwareMap.tryGet(Servo.class, "pl");
 
         drive = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
         clawArm = new Arm(armMotor);
@@ -51,35 +53,39 @@ public class RibbitTeleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            drive.setPowerWithController(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
-            clawArm.setPowerWithController(gamepad2.right_stick_y);
-            suspensionArm.setPowerWithController(gamepad2.left_stick_y);
+            try {
+                drive.setPowerWithController(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+                clawArm.setPowerWithController(gamepad2.right_stick_y);
+                suspensionArm.setPowerWithController(gamepad2.left_stick_y);
 
-            if (gamepad1.right_trigger == 1.0) {
-                cannon.fire();
+                if (gamepad1.right_trigger == 1.0) {
+                    cannon.fire();
+                }
+
+                if (gamepad1.b) {
+                    cannon.reset();
+                }
+
+                if (gamepad2.left_trigger == 1.0) {
+                    claws.toggleClaw(Claws.ServoSide.LEFT);
+                }
+
+                if (gamepad2.right_trigger == 1.0) {
+                    claws.toggleClaw(Claws.ServoSide.RIGHT);
+                }
+
+                telemetry.addData("Front Left Power:", frontLeft.getPower());
+                telemetry.addData("Front Right Power:", frontRight.getPower());
+                telemetry.addData("Back Left Power", backLeft.getPower());
+                telemetry.addData("Back Right Power", backRight.getPower());
+
+                telemetry.addData("Left Claw: ", (claws.isClawOpen(Claws.ServoSide.LEFT) ? "Closed" : "Open"));
+                telemetry.addData("Right Claw: ", (claws.isClawOpen(Claws.ServoSide.RIGHT) ? "Closed" : "Open"));
+
+                telemetry.update();
+            } catch(NullPointerException e) {
+                Log.e("NULLPOINTER", "Tried to call function from null component");
             }
-
-            if (gamepad1.b) {
-                cannon.reset();
-            }
-
-            if (gamepad2.left_trigger == 1.0) {
-                claws.toggleClaw(Claws.ServoSide.LEFT);
-            }
-
-            if (gamepad2.right_trigger == 1.0) {
-                claws.toggleClaw(Claws.ServoSide.RIGHT);
-            }
-
-            telemetry.addData("Front Left Power:", frontLeft.getPower());
-            telemetry.addData("Front Right Power:", frontRight.getPower());
-            telemetry.addData("Back Left Power", backLeft.getPower());
-            telemetry.addData("Back Right Power", backRight.getPower());
-
-            telemetry.addData("Left Claw: ", (claws.isClawOpen(Claws.ServoSide.LEFT) ? "Closed" : "Open"));
-            telemetry.addData("Right Claw: ", (claws.isClawOpen(Claws.ServoSide.RIGHT) ? "Closed" : "Open"));
-
-            telemetry.update();
         }
     }
 }

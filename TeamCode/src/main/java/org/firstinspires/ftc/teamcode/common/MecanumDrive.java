@@ -27,4 +27,25 @@ public class MecanumDrive {
         backLeft.setPower(y - x - r);
         backRight.setPower(y + x - r);
     }
+
+    public void setPowerManually(double power) {
+        frontLeft.setPower(power);
+        frontRight.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
+    }
+
+    public void setAllMotorsTarget(double x, double y, double r) {
+        frontLeft.setPower(x + y + r);
+        frontRight.setPower(x - y - r);
+        backLeft.setPower(y - x - r);
+        backRight.setPower(y + x - r);
+    }
+
+    void setAllMotorsMode(DcMotor.RunMode mode) {
+        frontLeft.setMode(mode);
+        frontRight.setMode(mode);
+        backLeft.setMode(mode);
+        backRight.setMode(mode);
+    }
 }

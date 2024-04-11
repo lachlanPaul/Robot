@@ -27,10 +27,8 @@ public class RibbitParkAuto extends LinearOpMode {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        while (opModeIsActive()) {
-            autoMovement.moveForward(5);
+        waitForStart();
 
-            autoMovement.update();
-        }
+        autoMovement.moveForward(5, 10);
     }
 }

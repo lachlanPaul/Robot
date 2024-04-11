@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.common;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 /**
  * Methods that can be used to simplify Autonomous movement
@@ -14,46 +13,43 @@ public class AutonomousMovement {
     public DcMotor backLeft;
     public DcMotor backRight;
 
+    public MecanumDrive drive;
+
     public AutonomousMovement(DcMotor fl, DcMotor fr, DcMotor bl, DcMotor br) {
         frontLeft = fl;
         frontRight = fr;
         backLeft = bl;
         backRight = br;
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        drive = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
     }
 
-    public void moveForward(int cm) {
+    public void moveForward(double y, int runForSeconds) {
         // TODO: Figure out proper unit of measurement.
         //  setTargetPosition() uses encoder ticks and not a specific unit of measurement.
-        setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
+        drive.setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
+        long capture = System.nanoTime();
 
-        setAllMotorsTarget(cm);
+        if (capture > System.nanoTime() + runForSeconds * 1e9) {
+            drive.setAllMotorsTarget(0, y, 0);
+        }
     }
 
-    public void moveBackwards(int cm) {
-        moveForward(-cm);
+    public void moveBackwards(double y, int seconds) {
+        moveForward(-y, seconds);
     }
 
-    public void moveRight(int cm) {
-        setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
+    public void moveRight(double x, int runForSeconds) {
+        drive.setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
+        long capture = System.nanoTime();
+
+        while (capture > System.nanoTime() + runForSeconds * 1e9) {
+            drive.setAllMotorsTarget(x, 0.0, 0.0);
+        }
     }
 
-    private void setAllMotorsMode(DcMotor.RunMode mode) {
-        frontLeft.setMode(mode);
-        frontRight.setMode(mode);
-        backLeft.setMode(mode);
-        backRight.setMode(mode);
-    }
-
-    private void setAllMotorsTarget(int cm) {
-        frontLeft.setTargetPosition(cm);
-        frontRight.setTargetPosition(cm);
-        backLeft.setTargetPosition(cm);
-        backRight.setTargetPosition(cm);
+    public void moveLeft(double x, int seconds) {
+        moveRight(-x, seconds);
     }
 
     public void update() {
