@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.common.BothWheels;
  *
  * @author Lachlan Paul, 2024
  */
+@Disabled
 @TeleOp(name = "RobotTeleOp")
 public class RobotTeleOp extends LinearOpMode {
     public DcMotor leftWheel;

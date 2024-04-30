@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Ribbit;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.common.AutonomousMovement;
 
+@Autonomous(name = "RibbitParkAuto")
 public class RibbitParkAuto extends LinearOpMode {
     public DcMotor frontLeft;
     public DcMotor frontRight;

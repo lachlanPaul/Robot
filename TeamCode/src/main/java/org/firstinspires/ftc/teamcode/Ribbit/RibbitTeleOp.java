@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Ribbit;
 import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.common.Cannon;
 import org.firstinspires.ftc.teamcode.common.Claws;
 import org.firstinspires.ftc.teamcode.common.MecanumDrive;
 
+@TeleOp(name = "RibbitTeleOp")
 public class RibbitTeleOp extends LinearOpMode {
     public DcMotor frontLeft;
     public DcMotor frontRight;
@@ -37,18 +39,18 @@ public class RibbitTeleOp extends LinearOpMode {
         backLeft = hardwareMap.tryGet(DcMotor.class, "bl");
         backRight = hardwareMap.tryGet(DcMotor.class, "br");
 
-        armMotor = hardwareMap.tryGet(DcMotor.class, "am");
-        suspensionMotor = hardwareMap.tryGet(DcMotor.class, "sm");
-
-        leftClaw = hardwareMap.tryGet(Servo.class, "lc");
-        rightClaw = hardwareMap.tryGet(Servo.class, "rc");
-        prolong = hardwareMap.tryGet(Servo.class, "pl");
+//        armMotor = hardwareMap.tryGet(DcMotor.class, "am");
+//        suspensionMotor = hardwareMap.tryGet(DcMotor.class, "sm");
+//
+//        leftClaw = hardwareMap.tryGet(Servo.class, "lc");
+//        rightClaw = hardwareMap.tryGet(Servo.class, "rc");
+//        prolong = hardwareMap.tryGet(Servo.class, "pl");
 
         drive = new MecanumDrive(frontLeft, frontRight, backLeft, backRight);
-        clawArm = new Arm(armMotor);
-        suspensionArm = new Arm(suspensionMotor);
-        claws = new Claws(leftClaw, rightClaw);
-        cannon = new Cannon(prolong);
+//        clawArm = new Arm(armMotor);
+//        suspensionArm = new Arm(suspensionMotor);
+//        claws = new Claws(leftClaw, rightClaw);
+//        cannon = new Cannon(prolong);
 
         waitForStart();
 
