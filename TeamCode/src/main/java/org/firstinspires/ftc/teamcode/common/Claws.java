@@ -6,8 +6,8 @@ public class Claws {
     public Servo leftClaw;
     public Servo rightClaw;
 
-    private boolean leftClawOpen = false;
-    private boolean rightClawOpen = false;
+    private boolean leftClawOpen;
+    private boolean rightClawOpen;
 
     public double CLOSED_POSITION = 0.0;
     public double OPEN_POSITION = 1.0;
@@ -25,18 +25,18 @@ public class Claws {
             case LEFT:
                 if (leftClaw.getPosition() == OPEN_POSITION) {
                     leftClaw.setPosition(CLOSED_POSITION);
-                    leftClawOpen = false;
+//                    leftClawOpen = false;
                 } else if (leftClaw.getPosition() == CLOSED_POSITION) {
                     leftClaw.setPosition(OPEN_POSITION);
-                    leftClawOpen = true;
+//                    leftClawOpen = true;
                 }
             case RIGHT:
                 if (rightClaw.getPosition() == OPEN_POSITION) {
                     rightClaw.setPosition(CLOSED_POSITION);
-                    rightClawOpen = false;
+//                    rightClawOpen = false;
                 } else if (rightClaw.getPosition() == CLOSED_POSITION) {
                     rightClaw.setPosition(OPEN_POSITION);
-                    rightClawOpen = true;
+//                    rightClawOpen = true;
                 }
         }
     }
