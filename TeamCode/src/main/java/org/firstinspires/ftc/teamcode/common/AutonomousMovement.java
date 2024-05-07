@@ -33,6 +33,8 @@ public class AutonomousMovement {
         if (capture > System.nanoTime() + runForSeconds * 1e9) {
             drive.setAllMotorsTarget(0, y, 0);
         }
+
+        update();
     }
 
     public void moveBackwards(double y, int seconds) {
@@ -46,6 +48,8 @@ public class AutonomousMovement {
         while (capture > System.nanoTime() + runForSeconds * 1e9) {
             drive.setAllMotorsTarget(x, 0.0, 0.0);
         }
+
+        update();
     }
 
     public void moveLeft(double x, int seconds) {

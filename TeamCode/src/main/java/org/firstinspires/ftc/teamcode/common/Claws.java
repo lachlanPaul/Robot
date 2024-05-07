@@ -15,6 +15,9 @@ public class Claws {
     public Claws(Servo lClaw, Servo rClaw){
         leftClaw = lClaw;
         rightClaw = rClaw;
+
+        leftClawOpen = leftClaw.getPosition() == OPEN_POSITION;
+        rightClawOpen = rightClaw.getPosition() == OPEN_POSITION;
     }
 
     public void toggleClaw(ServoSide servo) {
@@ -46,6 +49,20 @@ public class Claws {
                 return rightClawOpen;
         }
         return false;
+    }
+
+    /**
+     * Opens both claws.
+     * I've found that this saves time when two pixels are being dropped on the backboard.
+     */
+    public void openBothClaws() {
+        if (isClawOpen(ServoSide.LEFT)) {
+            toggleClaw(ServoSide.LEFT);
+        }
+
+        if (isClawOpen(ServoSide.RIGHT)) {
+            toggleClaw(ServoSide.RIGHT);
+        }
     }
 
     public enum ServoSide {

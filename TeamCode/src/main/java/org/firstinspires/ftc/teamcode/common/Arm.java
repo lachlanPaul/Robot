@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 public class Arm {
     public DcMotor arm;
+
     public Arm(DcMotor am) {
         arm = am;
     }

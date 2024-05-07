@@ -21,4 +21,12 @@ public class Cannon {
     public void reset() {
         prolong.setPosition(1.0);
     }
+
+    public void toggle() {
+        if (prolong.getPosition() == 1.0) {
+            fire();
+        } else if (prolong.getPosition() == 0.0) {
+            reset();
+        }
+    }
 }

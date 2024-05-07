@@ -76,6 +76,10 @@ public class RibbitTeleOp extends LinearOpMode {
                     claws.toggleClaw(Claws.ServoSide.RIGHT);
                 }
 
+                if (gamepad2.y) {
+                    claws.openBothClaws();
+                }
+
                 telemetry.addData("Front Left Power:", frontLeft.getPower());
                 telemetry.addData("Front Right Power:", frontRight.getPower());
                 telemetry.addData("Back Left Power", backLeft.getPower());

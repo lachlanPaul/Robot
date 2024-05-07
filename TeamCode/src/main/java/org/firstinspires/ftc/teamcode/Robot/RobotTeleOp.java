@@ -19,7 +19,6 @@ import org.firstinspires.ftc.teamcode.common.BothWheels;
 public class RobotTeleOp extends LinearOpMode {
     public DcMotor leftWheel;
     public DcMotor rightWheel;
-    public BothWheels bothWheels;
 
     @Override
     public void runOpMode() throws InterruptedException {
