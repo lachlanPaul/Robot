@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.common.BothWheels;
  *
  * @author Lachlan Paul, 2024
  */
+@Deprecated
 @Disabled
 @TeleOp(name = "RobotTeleOp")
 public class RobotTeleOp extends LinearOpMode {

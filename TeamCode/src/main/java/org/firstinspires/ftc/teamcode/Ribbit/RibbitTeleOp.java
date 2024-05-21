@@ -56,7 +56,11 @@ public class RibbitTeleOp extends LinearOpMode {
 
         while (opModeIsActive()) {
             try {
-                drive.setPowerWithController(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+                double y = -gamepad1.left_stick_y;
+                double x = gamepad1.left_stick_x;
+                double rx = gamepad1.right_stick_x;
+
+                drive.setPowerWithController(y, x, rx);
                 clawArm.setPowerWithController(gamepad2.right_stick_y);
                 suspensionArm.setPowerWithController(gamepad2.left_stick_y);
 

@@ -16,16 +16,16 @@ public class MecanumDrive {
         backRight = br;
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
+        frontRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        backRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
-    public void setPowerWithController(double x, double y, double r) {
-        frontLeft.setPower(x + y + r);
-        frontRight.setPower(x - y - r);
-        backLeft.setPower(y - x - r);
-        backRight.setPower(y + x - r);
+    public void setPowerWithController(double y, double x, double rx) {
+        frontLeft.setPower(y + x + rx);
+        frontRight.setPower(y - x + rx);
+        backLeft.setPower(y - x - rx);
+        backRight.setPower(y + x - rx);
     }
 
     public void setPowerManually(double power) {
@@ -35,11 +35,11 @@ public class MecanumDrive {
         backRight.setPower(power);
     }
 
-    public void setAllMotorsTarget(double x, double y, double r) {
-        frontLeft.setPower(x + y + r);
-        frontRight.setPower(x - y - r);
-        backLeft.setPower(y - x - r);
-        backRight.setPower(y + x - r);
+    public void setAllMotorsTarget(double y, double x, double rx) {
+        frontLeft.setPower(y + x - rx);
+        frontRight.setPower(y - x - rx);
+        backLeft.setPower(y - x - rx);
+        backRight.setPower(y + x - rx);
     }
 
     void setAllMotorsMode(DcMotor.RunMode mode) {
